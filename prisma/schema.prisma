@@ -72,7 +72,6 @@ model MockInterview {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
-  @@index([status])
 }
 
 model Session {
