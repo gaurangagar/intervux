@@ -1,6 +1,6 @@
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { llm } from "./llm";
-import { ResumeSchema } from "./ResumeSchema";
+import { ResumeSchema } from "./Schemas/resume-schema";
 
 const structuredLlm = llm.withStructuredOutput(ResumeSchema);
 
