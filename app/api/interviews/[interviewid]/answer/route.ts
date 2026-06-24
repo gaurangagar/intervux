@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { getCurrentUser } from "@/lib/current-user";
 
 import prisma from "@/lib/prisma";
 
@@ -8,31 +9,12 @@ export async function POST(
   { params }: { params: Promise<{ interviewId: string }> }
 ) {
   try {
-    const { userId: clerkId } = await auth();
-
-    if (!clerkId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
-    }
+    const user = await getCurrentUser();
+    const userId = user?.id;
 
     const { interviewId } = await params;
 
     const { answer, code } = await req.json();
-
-    const user = await prisma.user.findUnique({
-      where: {
-        clerkId,
-      },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
-    }
 
     const interview = await prisma.mockInterview.findFirst({
       where: {

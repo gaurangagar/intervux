@@ -14,6 +14,11 @@ const envSchema = z.object({
 
   GMAIL_USER:z.email(),
   GMAIL_APP_PASSWORD:z.string(),
+
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:z.string(),
+  CLERK_SECRET_KEY:z.string(),
+
+  CLERK_WEBHOOK_SECRET:z.string()
 });
 
 export const env = envSchema.parse(process.env);

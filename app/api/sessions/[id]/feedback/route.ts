@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import prisma from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/getCurrentUser";
-
+import { getCurrentUser } from "@/lib/current-user";
 import { sendReportEmail } from "@/lib/mailer";
 import { generatePerformanceReport } from "@/lib/generate-performance-report";
 
@@ -20,13 +18,6 @@ export async function POST(
 ) {
   try {
     const user = await getCurrentUser();
-
-    if (!user) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const { id } = await params;
 

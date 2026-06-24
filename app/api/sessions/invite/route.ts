@@ -4,32 +4,14 @@ import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { streamClient, chatClient } from "@/lib/stream";
 import { sendInviteEmail } from "@/lib/mailer";
+import { getCurrentUser } from "@/lib/current-user";
 
 const VALID_DIFFICULTIES = ["easy", "medium", "hard"] as const;
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId: clerkId } = await auth();
-
-    if (!clerkId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        clerkId,
-      },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
-    }
+    const user = await getCurrentUser();
+    const userId = user?.id;
 
     const {
       problem,

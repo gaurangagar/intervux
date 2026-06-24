@@ -1,19 +1,12 @@
 import { chatClient } from "@/lib/stream";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/current-user";
 
 export async function GET() {
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
-    const user = await currentUser();
+    const user = await getCurrentUser();
+    const userId = user?.id;
 
     const token = chatClient.createToken(userId);
 
