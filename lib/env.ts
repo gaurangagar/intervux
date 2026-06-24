@@ -8,6 +8,12 @@ const envSchema = z.object({
   JDOODLE_CLIENT_SECRET: z.string(),
 
   GROQ_API_KEY:z.string(),
+  
+  STREAM_API_KEY:z.string(),
+  STREAM_API_SECRET:z.string(),
+
+  GMAIL_USER:z.email(),
+  GMAIL_APP_PASSWORD:z.string(),
 });
 
 export const env = envSchema.parse(process.env);
