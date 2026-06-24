@@ -9,7 +9,12 @@ const VALID_DIFFICULTIES = ["easy", "medium", "hard"] as const;
 export async function POST(req: NextRequest) {
     try {
         const user = await getCurrentUser();
-        const userId = user?.id;
+        if (!user) {
+            return NextResponse.json(
+                { message: "Unauthorized" },
+                { status: 401 }
+            );
+        }
 
         const { problem, difficulty } = await req.json();
 

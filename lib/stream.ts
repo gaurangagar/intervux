@@ -1,6 +1,6 @@
 import { StreamChat } from "stream-chat";
 import { StreamClient } from "@stream-io/node-sdk";
-import { env } from "./env.js";
+import { env } from "./env";
 
 const apiKey = env.STREAM_API_KEY;
 const apiSecret = env.STREAM_API_SECRET;

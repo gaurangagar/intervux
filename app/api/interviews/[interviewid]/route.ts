@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 import { getCurrentUser } from "@/lib/current-user";
 
 export async function GET(
@@ -9,7 +8,12 @@ export async function GET(
 ) {
   try {
     const user = await getCurrentUser();
-    const userId = user?.id;
+    if (!user) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
     const { interviewId } = await params;
 

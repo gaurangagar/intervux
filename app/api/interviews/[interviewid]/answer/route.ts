@@ -10,7 +10,12 @@ export async function POST(
 ) {
   try {
     const user = await getCurrentUser();
-    const userId = user?.id;
+    if (!user) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
     const { interviewId } = await params;
 

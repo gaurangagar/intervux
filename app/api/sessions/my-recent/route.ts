@@ -5,7 +5,12 @@ import { getCurrentUser } from "@/lib/current-user";
 export async function GET(req: NextRequest) {
     try {
         const user = await getCurrentUser();
-        const userId = user?.id;
+        if (!user) {
+            return NextResponse.json(
+                { message: "Unauthorized" },
+                { status: 401 }
+            );
+        }
 
         const sessions = await prisma.session.findMany({
             where: {

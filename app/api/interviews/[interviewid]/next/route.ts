@@ -10,9 +10,7 @@ export async function POST(
 ) {
   try {
     const user = await getCurrentUser();
-    const userId = user?.id;
-
-    if (!userId) {
+    if (!user) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }

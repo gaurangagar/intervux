@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
-
+import { getCurrentUser } from "@/lib/current-user";
 import prisma from "@/lib/prisma";
 import { parseResumePDF } from "@/lib/resume-parser";
 
@@ -21,25 +20,12 @@ const getInterviewerName = () => {
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId: clerkId } = await auth();
-
-    if (!clerkId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        clerkId,
-      },
-    });
+    const user = await getCurrentUser();
 
     if (!user) {
       return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
+        { error: "Unauthorized" },
+        { status: 401 }
       );
     }
 
@@ -86,7 +72,7 @@ export async function POST(req: NextRequest) {
         experience,
         interviewType,
         interviewerName: getInterviewerName(),
-        resumeData,
+        resumeData: resumeData ?? undefined,
         conversation: [],
       },
     });
