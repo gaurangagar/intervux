@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { llm } from "@/lib/llm";
+import { llm } from "@/src/lib/llm";
 import { FeedbackSchema } from "./Schemas/feedback-schema";
 
 const feedbackModel = llm.withStructuredOutput(

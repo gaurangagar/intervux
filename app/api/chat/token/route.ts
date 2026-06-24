@@ -1,6 +1,6 @@
-import { chatClient } from "@/lib/stream";
+import { chatClient } from "@/src/lib/stream";
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/current-user";
+import { getCurrentUser } from "@/src/lib/current-user";
 
 export async function GET() {
   try {
@@ -11,7 +11,7 @@ export async function GET() {
         { status: 401 }
       );
     }
-    
+
     const userId = user.id;
 
     const token = chatClient.createToken(userId);

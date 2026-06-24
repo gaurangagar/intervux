@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/current-user";
-import { sendReportEmail } from "@/lib/mailer";
-import { generatePerformanceReport } from "@/lib/generate-performance-report";
+import prisma from "@/src/lib/prisma";
+import { getCurrentUser } from "@/src/lib/current-user";
+import { sendReportEmail } from "@/src/lib/mailer";
+import { generatePerformanceReport } from "@/src/lib/generate-performance-report";
 
 interface Ratings {
   problemSolving: number;
@@ -25,7 +25,7 @@ export async function POST(
         { status: 401 }
       );
     }
-    
+
     const { id } = await params;
 
     const body = await req.json();

@@ -1,4 +1,4 @@
-import { llm } from "@/lib/llm";
+import { llm } from "@/src/lib/llm";
 
 type ConversationMessage = {
   role: string;

@@ -1,10 +1,10 @@
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/prisma";
-import { streamClient, chatClient } from "@/lib/stream";
-import { sendInviteEmail } from "@/lib/mailer";
-import { getCurrentUser } from "@/lib/current-user";
+import prisma from "@/src/lib/prisma";
+import { streamClient, chatClient } from "@/src/lib/stream";
+import { sendInviteEmail } from "@/src/lib/mailer";
+import { getCurrentUser } from "@/src/lib/current-user";
 
 const VALID_DIFFICULTIES = ["easy", "medium", "hard"] as const;
 

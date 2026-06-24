@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/current-user";
-import prisma from "@/lib/prisma";
-import { parseResumePDF } from "@/lib/resume-parser";
+import { getCurrentUser } from "@/src/lib/current-user";
+import prisma from "@/src/lib/prisma";
+import { parseResumePDF } from "@/src/lib/resume-parser";
 
 const getInterviewerName = () => {
   const names = [

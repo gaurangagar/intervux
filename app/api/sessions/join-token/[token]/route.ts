@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
-import { chatClient } from "@/lib/stream";
-import { getCurrentUser } from "@/lib/current-user";
+import prisma from "@/src/lib/prisma";
+import { chatClient } from "@/src/lib/stream";
+import { getCurrentUser } from "@/src/lib/current-user";
 
 export async function POST(
     req: NextRequest,

@@ -38,6 +38,6 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3000, () => {
+httpServer.listen(3001, () => {
   console.log("Socket server running on port 5000");
 });

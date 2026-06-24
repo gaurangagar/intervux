@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/prisma";
-import { generateInterviewFeedback } from "@/lib/interview-feedback";
-import { getCurrentUser } from "@/lib/current-user";
+import prisma from "@/src/lib/prisma";
+import { generateInterviewFeedback } from "@/src/lib/interview-feedback";
+import { getCurrentUser } from "@/src/lib/current-user";
 
 export async function POST(
   req: NextRequest,

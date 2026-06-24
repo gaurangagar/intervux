@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/lib/env";
+import { env } from "@/src/lib/env";
 
 const LANGUAGE_MAPPING = {
   cpp: { language: "cpp17", versionIndex: "1" },         // C++17
