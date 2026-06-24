@@ -1,13 +1,16 @@
 import nodemailer from "nodemailer";
 import { env } from "./env";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.example.com",
+  port: 587,
+  secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
   auth: {
     user: env.GMAIL_USER,
     pass: env.GMAIL_APP_PASSWORD,
   },
-});
+} as SMTPTransport.Options);
 
 interface InviteEmailProps {
   toEmail: string;
@@ -38,16 +41,16 @@ export async function sendInviteEmail({
   joinLink,
 }: InviteEmailProps) {
   const mailOptions = {
-    from: `"CodeX Platform" <${process.env.GMAIL_USER}>`,
+    from: `"Intervux Platform" <${process.env.GMAIL_USER}>`,
     to: toEmail,
-    subject: `${hostName} has invited you to a private coding interview on CodeX`,
+    subject: `${hostName} has invited you to a private coding interview on Intervux`,
     html: `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>CodeX Interview Invitation</title>
+          <title>Intervux Interview Invitation</title>
         </head>
         <body style="margin:0;padding:0;background-color:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
           <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0f172a;padding:40px 0;">
@@ -61,7 +64,7 @@ export async function sendInviteEmail({
                         You have been invited
                       </p>
                       <h1 style="margin:0;font-size:36px;font-weight:900;color:#ffffff;">
-                        CodeX
+                        Intervux
                       </h1>
                       <p style="margin:8px 0 0 0;font-size:15px;color:rgba(255,255,255,0.8);">
                         Real-Time Collaborative Interview Platform
@@ -79,7 +82,7 @@ export async function sendInviteEmail({
                         <strong style="color:#a78bfa;">${hostName}</strong>
                         has invited you to participate in a
                         <strong> private coding interview session</strong>
-                        on the CodeX platform.
+                        on the Intervux platform.
                       </p>
 
                       <div style="background-color:#0f172a;border:1px solid #334155;border-left:4px solid #6366f1;border-radius:10px;padding:20px 24px;margin:32px 0;">
@@ -117,7 +120,7 @@ export async function sendInviteEmail({
                   <tr>
                     <td style="background:#0f172a;padding:24px;text-align:center;">
                       <p style="font-size:12px;color:#334155;">
-                        © ${new Date().getFullYear()} CodeX Platform
+                        © ${new Date().getFullYear()} Intervux Platform
                       </p>
                     </td>
                   </tr>
@@ -193,9 +196,9 @@ export async function sendReportEmail({
     .join("");
 
   const mailOptions = {
-    from: `"CodeX Platform" <${process.env.GMAIL_USER}>`,
+    from: `"Intervux Platform" <${process.env.GMAIL_USER}>`,
     to: toEmail,
-    subject: `Your CodeX Interview Performance Report — ${problem}`,
+    subject: `Your Intervux Interview Performance Report — ${problem}`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -208,7 +211,7 @@ export async function sendReportEmail({
 
                 <tr>
                   <td style="background:linear-gradient(135deg,#059669,#0891b2,#6366f1);padding:40px;text-align:center;">
-                    <h1 style="margin:0;color:#fff;">CodeX</h1>
+                    <h1 style="margin:0;color:#fff;">Intervux</h1>
                     <p style="color:rgba(255,255,255,0.8);">
                       AI-Powered Interview Analysis
                     </p>
