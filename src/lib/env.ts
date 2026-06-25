@@ -18,7 +18,11 @@ const envSchema = z.object({
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:z.string(),
   CLERK_SECRET_KEY:z.string(),
 
-  CLERK_WEBHOOK_SECRET:z.string()
+  CLERK_WEBHOOK_SECRET:z.string(),
+
+  NEXT_PUBLIC_API_URL:z.string(),
+
+  NEXT_PUBLIC_STREAM_API_KEY:z.string(),
 });
 
 export const env = envSchema.parse(process.env);

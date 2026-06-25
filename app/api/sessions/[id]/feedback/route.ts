@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/src/lib/prisma";
-import { getCurrentUser } from "@/src/lib/current-user";
-import { sendReportEmail } from "@/src/lib/mailer";
-import { generatePerformanceReport } from "@/src/lib/generate-performance-report";
+import prisma from "@/src/lib/backend/prisma";
+import { getCurrentUser } from "@/src/lib/backend/current-user";
+import { sendReportEmail } from "@/src/lib/backend/mailer";
+import { generatePerformanceReport } from "@/src/lib/backend/generate-performance-report";
 
 interface Ratings {
   problemSolving: number;

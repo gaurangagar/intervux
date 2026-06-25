@@ -1,6 +1,6 @@
-import { chatClient } from "@/src/lib/stream";
+import { chatClient } from "@/src/lib/backend/stream";
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/src/lib/current-user";
+import { getCurrentUser } from "@/src/lib/backend/current-user";
 
 export async function GET() {
   try {

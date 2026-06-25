@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import prisma from "@/src/lib/prisma";
-import { streamClient, chatClient } from "@/src/lib/stream";
-import { getCurrentUser } from "@/src/lib/current-user";
+import prisma from "@/src/lib/backend/prisma";
+import { streamClient, chatClient } from "@/src/lib/backend/stream";
+import { getCurrentUser } from "@/src/lib/backend/current-user";
 
 const VALID_DIFFICULTIES = ["easy", "medium", "hard"] as const;
 

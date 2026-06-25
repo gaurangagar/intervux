@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { env } from "./env";
+import { env } from "../env";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 const transporter = nodemailer.createTransport({
@@ -142,8 +142,7 @@ export async function sendInviteEmail({
     console.error(error);
 
     throw new Error(
-      `Failed to send invite email: ${
-        error instanceof Error ? error.message : "Unknown error"
+      `Failed to send invite email: ${error instanceof Error ? error.message : "Unknown error"
       }`
     );
   }
@@ -173,8 +172,8 @@ export async function sendReportEmail({
         value >= 4
           ? "#22c55e"
           : value === 3
-          ? "#f59e0b"
-          : "#ef4444";
+            ? "#f59e0b"
+            : "#ef4444";
 
       return `
         <tr>
@@ -267,8 +266,7 @@ export async function sendReportEmail({
     console.error(error);
 
     throw new Error(
-      `Failed to send report email: ${
-        error instanceof Error ? error.message : "Unknown error"
+      `Failed to send report email: ${error instanceof Error ? error.message : "Unknown error"
       }`
     );
   }
