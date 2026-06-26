@@ -27,7 +27,7 @@ export interface Problem {
     };
 }
 
-export const PROBLEMS: Record<string, Problem> = {
+export const problems: Record<string, Problem> = {
     "two-sum": {
         id: "two-sum",
         title: "Two Sum",

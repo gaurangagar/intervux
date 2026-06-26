@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/src/lib/env";
 
 const LANGUAGE_MAPPING = {
   cpp: { language: "cpp17", versionIndex: "1" },         // C++17
@@ -26,8 +25,8 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = {
-      clientId: env.JDOODLE_CLIENT_ID,
-      clientSecret: env.JDOODLE_CLIENT_SECRET,
+      clientId: process.env.JDOODLE_CLIENT_ID,
+      clientSecret: process.env.JDOODLE_CLIENT_SECRET,
       script: code,
       language: languageConfig.language,
       versionIndex: languageConfig.versionIndex,

@@ -1,6 +1,4 @@
-import { env } from "../env";
-
-const API_URL = `${env.NEXT_PUBLIC_API_URL}/execute`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/execute`;
 
 /**
  * @param {string} language - programming language
