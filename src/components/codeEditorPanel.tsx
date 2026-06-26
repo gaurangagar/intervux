@@ -2,7 +2,7 @@
 
 import Editor from "@monaco-editor/react";
 import { Loader2, Play } from "lucide-react";
-import { LANGUAGE_CONFIG } from "../data/problems";
+import { language_config } from "../data/problems";
 
 interface LanguageConfig {
   name: string;
@@ -11,7 +11,7 @@ interface LanguageConfig {
 }
 
 interface CodeEditorPanelProps {
-  selectedLanguage: keyof typeof LANGUAGE_CONFIG;
+  selectedLanguage: keyof typeof language_config;
   code: string;
   isRunning: boolean;
   onLanguageChange: (
@@ -30,7 +30,7 @@ export default function CodeEditorPanel({
   onRunCode,
 }: CodeEditorPanelProps) {
   const language =
-    LANGUAGE_CONFIG[selectedLanguage];
+    language_config[selectedLanguage];
 
   return (
     <div className="flex h-full flex-col rounded-xl border bg-background">
@@ -48,9 +48,7 @@ export default function CodeEditorPanel({
             onChange={onLanguageChange}
             className="rounded-lg border bg-background px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
           >
-            {Object.entries(
-              LANGUAGE_CONFIG
-            ).map(([key, lang]) => (
+            {(Object.entries(language_config) as [string, LanguageConfig][]).map(([key, lang]) => (
               <option
                 key={key}
                 value={key}

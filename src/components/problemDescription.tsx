@@ -2,24 +2,7 @@
 
 import { getDifficultyBadgeClass } from "../lib/frontend/getDifficultyBadgeClass";
 
-interface Example {
-  input: string;
-  output: string;
-  explanation?: string;
-}
-
-interface Problem {
-  id: string;
-  title: string;
-  difficulty: "easy" | "medium" | "hard";
-  category: string;
-  description: {
-    text: string;
-    notes: string[];
-  };
-  examples: Example[];
-  constraints: string[];
-}
+import { Problem } from "../data/problems";
 
 interface ProblemDescriptionProps {
   problem: Problem;

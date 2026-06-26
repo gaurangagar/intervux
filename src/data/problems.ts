@@ -489,7 +489,7 @@ export interface LanguageConfig {
     monacoLang: string;
 }
 
-export const LANGUAGE_CONFIG: Record<
+export const language_config: Record<
     "cpp" | "javascript" | "python" | "java",
     LanguageConfig
 > = {
