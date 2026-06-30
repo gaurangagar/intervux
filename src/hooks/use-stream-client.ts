@@ -7,13 +7,7 @@ import {
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/nextjs";
 import { disconnectStreamClient, initializeStreamClient } from "../lib/frontend/stream-client";
-import { sessionApi } from "@/src/services/session-api";
-
-interface Session {
-  id: string;
-  callId: string;
-  status: "active" | "completed";
-}
+import { sessionApi, type Session } from "@/src/services/session-api";
 
 interface UseStreamClientProps {
   session: Session | null;

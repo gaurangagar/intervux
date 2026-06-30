@@ -30,7 +30,9 @@
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^4.11.2",
     "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
     "stream-chat": "^9.47.1",
+    "stream-chat-react": "^14.6.0",
     "svix": "^1.96.0",
     "zod": "^4.4.3"
   },

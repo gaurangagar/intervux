@@ -165,7 +165,7 @@ export default function ProblemPage() {
 
       const expectedOutput =
         currentProblem.expectedOutput[
-          selectedLanguage
+        selectedLanguage
         ];
 
       if (!expectedOutput) {

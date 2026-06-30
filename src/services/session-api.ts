@@ -77,7 +77,7 @@ export interface EndSessionResponse {
 }
 
 export interface JoinByTokenResponse {
-  session: Session;
+  sessionId: string;
 }
 
 export const sessionApi = {
@@ -137,7 +137,7 @@ export const sessionApi = {
   joinByToken: (token: string, inviteToken: string) =>
     authenticatedRequest<JoinByTokenResponse>(token, {
       url: `/api/sessions/join-token/${inviteToken}`,
-      method: "GET",
+      method: "POST",
     }),
 
   submitFeedback: (

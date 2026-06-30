@@ -124,12 +124,12 @@ export default function DashboardPage() {
       setShowCreateModal(false);
 
       router.push(`/session/${data.session.id}`);
-    } catch (error:any) {
+    } catch (error: any) {
       console.error(error);
 
       toast.error(
         error?.response?.data?.message ??
-          "Failed to create session."
+        "Failed to create session."
       );
     } finally {
       setIsCreating(false);
@@ -164,7 +164,7 @@ export default function DashboardPage() {
 
       toast.error(
         error?.response?.data?.message ??
-          "Failed to send invitation."
+        "Failed to send invitation."
       );
     } finally {
       setIsSendingInvite(false);
@@ -183,7 +183,7 @@ export default function DashboardPage() {
       session.participant?.clerkId === user.id
     );
   }
-    return (
+  return (
     <>
       <div className="min-h-screen bg-background">
         <Navbar />

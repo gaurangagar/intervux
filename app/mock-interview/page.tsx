@@ -100,7 +100,7 @@ export default function MockInterviewPage() {
 
       toast.error(
         error?.response?.data?.error ??
-          "Failed to start interview."
+        "Failed to start interview."
       );
     } finally {
       setIsLoading(false);
