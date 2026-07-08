@@ -26,6 +26,15 @@ export default function DashboardPage() {
   const { user } = useUser();
   const { getToken } = useAuth();
 
+//   useEffect(() => {
+//   const fetchToken = async () => {
+//     const token = await getToken();
+//     console.log("hello"+token);
+//   };
+
+//   fetchToken();
+// }, [getToken]);
+
   /* ----------------------------- Modal State ----------------------------- */
 
   const [showCreateModal, setShowCreateModal] = useState(false);

@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import prisma from "@/src/lib/backend/prisma";
 
 export async function POST(req: Request) {
+  console.log("=== Clerk webhook received ===");
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET!;
 
   const payload = await req.text();
@@ -31,6 +32,9 @@ export async function POST(req: Request) {
   }
 
   const { type, data } = evt;
+
+  console.log("Webhook event:", type);
+  console.log("User ID:", data.id);
 
   if (type === "user.created") {
     await prisma.user.create({
