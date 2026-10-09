@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import prisma from "@/src/lib/backend/prisma";
 import { generateInterviewFeedback } from "@/src/lib/backend/interview-feedback";
 import { getCurrentUser } from "@/src/lib/backend/current-user";
@@ -38,7 +37,7 @@ export async function POST(
         role: interview.role,
         experience: interview.experience,
         conversation:
-          (interview.conversation as any[]) || [],
+          (interview.conversation as Array<{ role: string; content: string }>) || [],
       });
 
     const updatedInterview =

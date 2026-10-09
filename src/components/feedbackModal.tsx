@@ -172,9 +172,10 @@ export default function FeedbackModal({
       );
 
       onFeedbackSubmitted();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
           "Failed to submit feedback."
       );
     }

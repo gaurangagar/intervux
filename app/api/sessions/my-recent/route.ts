@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/src/lib/backend/prisma";
 import { getCurrentUser } from "@/src/lib/backend/current-user";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
     try {
         const user = await getCurrentUser();
         if (!user) {

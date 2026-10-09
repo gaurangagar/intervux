@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Clock,
   Loader2,
   Users,
   History,
@@ -30,7 +29,7 @@ export default function RecentSessions({
           </h2>
 
           <p className="text-sm text-muted-foreground">
-            Sessions you've participated in recently.
+            Sessions you&apos;ve participated in recently.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useUser, useAuth } from "@clerk/nextjs";
 import { io, Socket } from "socket.io-client";
@@ -24,7 +24,6 @@ import {
 
 import {
   Loader2,
-  LogOut,
   PhoneOff,
 } from "lucide-react";
 
@@ -58,6 +57,7 @@ export default function SessionPage() {
   const [loadingSession, setLoadingSession] =
     useState(true);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [output, setOutput] =
     useState<any>(null);
 
@@ -108,7 +108,7 @@ export default function SessionPage() {
     isParticipant,
   });
 
-  const fetchSession = async () => {
+  const fetchSession = useCallback(async () => {
     try {
       setLoadingSession(true);
 
@@ -126,11 +126,11 @@ export default function SessionPage() {
       );
 
       setSession(data);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
         "Failed to load session."
       );
 
@@ -138,13 +138,13 @@ export default function SessionPage() {
     } finally {
       setLoadingSession(false);
     }
-  };
+  }, [getToken, router, sessionId]);
 
   useEffect(() => {
     if (!sessionId) return;
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchSession();
-  }, [sessionId]);
+  }, [sessionId, fetchSession]);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -196,6 +196,7 @@ export default function SessionPage() {
       ];
 
     if (starter) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCode(starter);
       setOutput(null);
     }
@@ -233,11 +234,11 @@ export default function SessionPage() {
       } else {
         toast.error(result.error || "Execution failed.");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { message?: string };
       toast.error(
-        error?.message ?? "Failed to execute code."
+        err?.message ?? "Failed to execute code."
       );
     } finally {
       setIsRunning(false);
@@ -290,11 +291,11 @@ export default function SessionPage() {
       toast.success("Session ended.");
 
       router.push("/dashboard");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
         "Failed to end session."
       );
     }
@@ -315,10 +316,11 @@ export default function SessionPage() {
       toast.success("Feedback submitted successfully.");
       setShowFeedbackModal(false);
       router.push("/dashboard");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
         "Failed to submit feedback."
       );
     } finally {

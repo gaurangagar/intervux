@@ -1,8 +1,7 @@
 "use client";
 
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import {
-  ArrowRight,
   Lock,
   Plus,
 } from "lucide-react";

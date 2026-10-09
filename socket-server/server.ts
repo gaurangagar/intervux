@@ -11,7 +11,6 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  console.log("Connected:", socket.id);
 
   socket.on("join-session", (sessionId) => {
     socket.join(sessionId);

@@ -1,9 +1,9 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
+import { WebhookEvent } from "@clerk/nextjs/server";
 import prisma from "@/src/lib/backend/prisma";
 
 export async function POST(req: Request) {
-  console.log("=== Clerk webhook received ===");
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET!;
 
   const payload = await req.text();
@@ -19,22 +19,19 @@ export async function POST(req: Request) {
 
   const wh = new Webhook(WEBHOOK_SECRET);
 
-  let evt: any;
+  let evt: WebhookEvent;
 
   try {
     evt = wh.verify(payload, {
       "svix-id": svixId,
       "svix-timestamp": svixTimestamp,
       "svix-signature": svixSignature,
-    });
-  } catch (err) {
+    }) as WebhookEvent;
+  } catch (_err) {
     return new Response("Invalid signature", { status: 400 });
   }
 
   const { type, data } = evt;
-
-  console.log("Webhook event:", type);
-  console.log("User ID:", data.id);
 
   if (type === "user.created") {
     await prisma.user.create({

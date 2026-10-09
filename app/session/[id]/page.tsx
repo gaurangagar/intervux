@@ -347,11 +347,11 @@ function InterviewSessionPage() {
             setInterview(data);
 
             setMessages(
-                data.conversation ?? []
+                (data.conversation as InterviewMessage[]) ?? []
             );
 
             if (
-                data.conversation?.length === 0 &&
+                (data.conversation as InterviewMessage[])?.length === 0 &&
                 data.status !== "completed"
             ) {
                 fetchNextQuestion();

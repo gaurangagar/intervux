@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/src/lib/backend/prisma";
 import { generateInterviewQuestion } from "@/src/lib/backend/interview-generator";
@@ -47,11 +46,11 @@ export async function POST(
       interviewType: interview.interviewType,
       resumeData: interview.resumeData,
       conversation:
-        (interview.conversation as any[]) || [],
+        (interview.conversation as Array<{ role: string; content: string }>) || [],
     });
 
     const updatedConversation = [
-      ...((interview.conversation as any[]) || []),
+      ...((interview.conversation as Array<{ role: string; content: string }>) || []),
       {
         role: "interviewer",
         content: aiMessage,

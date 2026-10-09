@@ -5,7 +5,7 @@ const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!;
 let client: StreamVideoClient | null = null;
 let currentUserId: string | null = null;
 
-export const initializeStreamClient = async (user: any, token: string) => {
+export const initializeStreamClient = async (user: { id: string; [key: string]: unknown }, token: string) => {
   if (client && currentUserId === user.id) {
     return client;
   }

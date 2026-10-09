@@ -20,8 +20,6 @@ export async function parseResumePDF(pdf:File) {
         const loader = new PDFLoader(pdf);
         const docs = await loader.load();
 
-        console.log(docs);
-
         const text = docs
         .map((doc) => doc.pageContent)
         .join("\n");

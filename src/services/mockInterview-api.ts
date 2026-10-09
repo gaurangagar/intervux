@@ -19,9 +19,9 @@ export interface MockInterview {
   role: string;
   experience: number;
   interviewType: string;
-  resumeData?: any;
-  conversation?: any;
-  feedback?: any;
+  resumeData?: unknown;
+  conversation?: unknown;
+  feedback?: unknown;
   status: "in_progress" | "completed";
   createdAt: string;
   updatedAt: string;

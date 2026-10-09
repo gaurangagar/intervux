@@ -26,15 +26,6 @@ export default function DashboardPage() {
   const { user } = useUser();
   const { getToken } = useAuth();
 
-//   useEffect(() => {
-//   const fetchToken = async () => {
-//     const token = await getToken();
-//     console.log("hello"+token);
-//   };
-
-//   fetchToken();
-// }, [getToken]);
-
   /* ----------------------------- Modal State ----------------------------- */
 
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -133,11 +124,11 @@ export default function DashboardPage() {
       setShowCreateModal(false);
 
       router.push(`/session/${data.session.id}`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
         "Failed to create session."
       );
     } finally {
@@ -168,11 +159,11 @@ export default function DashboardPage() {
       onSuccess?.(data);
 
       router.push(`/session/${data.session.id}`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error?.response?.data?.message ??
+        err?.response?.data?.message ??
         "Failed to send invitation."
       );
     } finally {
@@ -261,7 +252,7 @@ export default function DashboardPage() {
         }
         onSendInvite={(config, options) =>
           handleSendInvite(config, {
-            onSuccess: (data) => {
+            onSuccess: () => {
               options?.onSuccess?.();
             },
           })

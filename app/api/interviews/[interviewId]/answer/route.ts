@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import { getCurrentUser } from "@/src/lib/backend/current-user";
 
 import prisma from "@/src/lib/backend/prisma";
@@ -48,7 +47,7 @@ ${code}
     }
 
     const currentConversation =
-      (interview.conversation as any[]) || [];
+      (interview.conversation as Array<{ role: string; content: string }>) || [];
 
     const updatedConversation = [
       ...currentConversation,

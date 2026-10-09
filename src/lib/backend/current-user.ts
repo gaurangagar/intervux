@@ -4,8 +4,6 @@ import prisma from "./prisma";
 export async function getCurrentUser() {
   const { userId } = await auth();
 
-  console.log("Clerk userId:", userId);
-
   if (!userId) {
     return null;
   }
@@ -15,8 +13,6 @@ export async function getCurrentUser() {
       clerkId: userId,
     },
   });
-
-  console.log("Database user:", user);
 
   return user;
 }

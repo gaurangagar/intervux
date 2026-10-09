@@ -135,7 +135,6 @@ export async function sendInviteEmail({
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Invite email sent:", info.messageId);
     return info;
   } catch (error) {
     console.error(error);
@@ -259,7 +258,6 @@ export async function sendReportEmail({
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Report email sent:", info.messageId);
     return info;
   } catch (error) {
     console.error(error);

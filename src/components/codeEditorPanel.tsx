@@ -1,6 +1,7 @@
 "use client";
 
 import Editor from "@monaco-editor/react";
+import Image from "next/image";
 import { Loader2, Play } from "lucide-react";
 import { language_config } from "../data/problems";
 
@@ -37,9 +38,11 @@ export default function CodeEditorPanel({
       {/* Toolbar */}
       <div className="flex items-center justify-between border-b px-5 py-3">
         <div className="flex items-center gap-3">
-          <img
+          <Image
             src={language.icon}
             alt={language.name}
+            width={20}
+            height={20}
             className="h-5 w-5"
           />
 

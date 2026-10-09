@@ -95,11 +95,11 @@ export default function MockInterviewPage() {
       router.push(
         `/mock-interview/session/${data.id}`
       );
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-
+      const err = error as { response?: { data?: { error?: string } } };
       toast.error(
-        error?.response?.data?.error ??
+        err?.response?.data?.error ??
         "Failed to start interview."
       );
     } finally {

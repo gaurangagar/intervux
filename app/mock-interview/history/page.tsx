@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { HistoryIcon, Loader2Icon, ArrowRightIcon, BriefcaseIcon, PlayCircleIcon } from "lucide-react";
@@ -16,11 +16,7 @@ function HistoryPage() {
   const [history, setHistory] = useState<MockInterview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchHistory();
-  }, []);
-
-  const fetchHistory = async () => {
+  const fetchHistory = useCallback(async () => {
     try {
       const token = await getToken();
       if (!token) {
@@ -35,7 +31,11 @@ function HistoryPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [getToken]);
+
+  useEffect(() => {
+    fetchHistory();
+  }, [fetchHistory]);
 
   return (
     <div className="min-h-screen bg-base-200">
@@ -65,7 +65,7 @@ function HistoryPage() {
           <div className="text-center py-20 bg-base-100 rounded-2xl shadow-sm border border-base-300">
             <BriefcaseIcon className="size-16 text-base-content/20 mx-auto mb-4" />
             <h3 className="text-2xl font-semibold mb-2">No Interviews Yet</h3>
-            <p className="text-base-content/60 mb-6">You haven't taken any mock interviews. Start one today!</p>
+            <p className="text-base-content/60 mb-6">You haven&apos;t taken any mock interviews. Start one today!</p>
             <Link href="/mock-interview" className="btn btn-primary">Start Now</Link>
           </div>
         ) : (
@@ -99,9 +99,9 @@ function HistoryPage() {
                       <p className="text-sm text-base-content/50 mb-1">
                         {format(new Date(interview.createdAt), "MMM d, yyyy")}
                       </p>
-                      {isCompleted && interview.feedback?.score !== undefined ? (
+                      {isCompleted && (interview.feedback as { score?: number })?.score !== undefined ? (
                         <div className="font-bold text-lg text-primary">
-                          Score: {interview.feedback.score}/10
+                          Score: {(interview.feedback as { score?: number }).score}/10
                         </div>
                       ) : !isCompleted ? (
                         <div className="text-sm text-warning font-medium flex items-center gap-1 justify-end">

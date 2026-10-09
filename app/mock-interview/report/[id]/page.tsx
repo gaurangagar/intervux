@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
@@ -44,11 +44,7 @@ function ReportPage() {
     const [interview, setInterview] = useState<Interview | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        fetchInterviewData();
-    }, [id]);
-
-    const fetchInterviewData = async () => {
+    const fetchInterviewData = useCallback(async () => {
         try {
             const token = await getToken();
             if (!token) {
@@ -72,7 +68,11 @@ function ReportPage() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [getToken, id, router]);
+
+    useEffect(() => {
+        fetchInterviewData();
+    }, [fetchInterviewData]);
 
     if (isLoading) {
         return (

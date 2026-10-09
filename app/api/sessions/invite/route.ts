@@ -1,6 +1,5 @@
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import prisma from "@/src/lib/backend/prisma";
 import { streamClient, chatClient } from "@/src/lib/backend/stream";
 import { sendInviteEmail } from "@/src/lib/backend/mailer";
@@ -121,8 +120,7 @@ export async function POST(req: NextRequest) {
         callId,
         {
           created_by_id: user.clerkId,
-          members: [user.clerkId],
-        } as any
+        } as Record<string, unknown>
       );
 
       await channel.create();

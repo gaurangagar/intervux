@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/src/lib/backend/prisma";
 import { chatClient } from "@/src/lib/backend/stream";
-import { auth } from "@clerk/nextjs/server";
 import { getCurrentUser } from "@/src/lib/backend/current-user";
 
 export async function POST(

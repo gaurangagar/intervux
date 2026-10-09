@@ -76,10 +76,10 @@ Write in flowing paragraphs.
 
     if (Array.isArray(response.content)) {
       return response.content
-        .map((item: any) =>
+        .map((item) =>
           typeof item === "string"
             ? item
-            : item?.text || ""
+            : typeof item === 'object' && item !== null && 'text' in item ? (item as { text?: string })?.text || "" : ""
         )
         .join("");
     }

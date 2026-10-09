@@ -42,8 +42,9 @@ function JoinByTokenPage() {
 
         const data = await sessionApi.joinByToken(authToken, inviteToken);
         router.replace(`/session/${data.sessionId}`);
-      } catch (err: any) {
-        setError(err.response?.data?.message || "Invalid or expired invite link.");
+      } catch (err: unknown) {
+        const errorObj = err as { response?: { data?: { message?: string } } };
+        setError(errorObj.response?.data?.message || "Invalid or expired invite link.");
         setJoining(false);
       }
     };
@@ -73,7 +74,7 @@ function JoinByTokenPage() {
             </h1>
 
             <p className="text-base-content/60 mb-6 leading-relaxed">
-              You've been invited to a <strong className="text-base-content">private coding interview</strong> on Intervux.
+              You&apos;ve been invited to a <strong className="text-base-content">private coding interview</strong> on Intervux.
               To join, you need to <strong className="text-base-content">log in or create an account</strong> with the
               email address that received this invitation.
             </p>
@@ -84,8 +85,8 @@ function JoinByTokenPage() {
                 <p className="font-semibold mb-1">📌 Important:</p>
                 <ul className="list-disc list-inside space-y-1 text-base-content/70">
                   <li>You must sign in with the <strong>same email</strong> that received the invite</li>
-                  <li>If you're new to Intervux, you can create a free account</li>
-                  <li>After signing in, you'll be redirected back here automatically</li>
+                  <li>If you&apos;re new to Intervux, you can create a free account</li>
+                  <li>After signing in, you&apos;ll be redirected back here automatically</li>
                 </ul>
               </div>
             </div>
@@ -105,7 +106,7 @@ function JoinByTokenPage() {
               </button>
 
               <p className="text-xs text-base-content/40 text-center">
-                You'll be redirected back to this invite after signing in
+                You&apos;ll be redirected back to this invite after signing in
               </p>
             </div>
           </div>

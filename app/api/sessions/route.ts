@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import prisma from "@/src/lib/backend/prisma";
 import { streamClient, chatClient } from "@/src/lib/backend/stream";
 import { getCurrentUser } from "@/src/lib/backend/current-user";

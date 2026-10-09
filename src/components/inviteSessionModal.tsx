@@ -8,7 +8,6 @@ import {
   Lock,
   Mail,
   Send,
-  User,
   X,
 } from "lucide-react";
 import { problems } from "../data/problems";
